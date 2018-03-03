@@ -3,6 +3,7 @@
 namespace Drupal\hello_world;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use \Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Class HelloWorldSalutation.
@@ -12,16 +13,29 @@ class HelloWorldSalutation {
   use StringTranslationTrait;
 
   /**
-   * Constructs a new HelloWorldSalutation object.
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  public function __construct() {
+  protected $configFactory;
 
+  /**
+   * Constructs a new HelloWorldSalutation object.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   */
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
   }
 
   /**
   * Returns the salutation
   */
   public function getSalutation() {
+    $config = $this->configFactory->get('hello_world.custom_salutation');
+    $salutation = $config->get('salutation');
+
+    if ($salutation != "") {
+      return $salutation;
+    }
+
     $time = new \DateTime();
     if ((int) $time->format('G') >= 06 && (int) $time->format('G') < 12) {
       return $this->t('Good morning world');
