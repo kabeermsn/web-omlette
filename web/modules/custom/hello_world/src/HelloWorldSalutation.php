@@ -4,6 +4,8 @@ namespace Drupal\hello_world;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use \Drupal\Core\Config\ConfigFactoryInterface;
+use \Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Drupal\hello_world\SalutationEvent;
 
 /**
  * Class HelloWorldSalutation.
@@ -18,11 +20,18 @@ class HelloWorldSalutation {
   protected $configFactory;
 
   /**
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
    * Constructs a new HelloWorldSalutation object.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, EventDispatcherInterface $eventDispatcher) {
     $this->configFactory = $config_factory;
+    $this->eventDispatcher = $eventDispatcher;
   }
 
   /**
@@ -33,7 +42,11 @@ class HelloWorldSalutation {
     $salutation = $config->get('salutation');
 
     if ($salutation != "") {
-      return $salutation;
+      $event = new SalutationEvent();
+      $event->setValue($salutation);
+      $event = $this->eventDispatcher->dispatch(SalutationEvent::EVENT,
+        $event);
+      return $event->getValue();
     }
 
     $time = new \DateTime();

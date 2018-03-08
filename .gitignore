@@ -6,6 +6,8 @@
 /web/themes/contrib/
 /web/profiles/contrib/
 /web/libraries/
+9781782168775_Code.zip
+/Drupal8ModuleDevelopment_Code/*
 
 # Ignore sensitive information
 /web/sites/*/settings.php

@@ -1,0 +1,14 @@
+uuid: 8f0189c0-3589-4d22-97ca-33276c213587
+name: 'Learn Drupal 8 webomlette'
+mail: kabeermsn@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
