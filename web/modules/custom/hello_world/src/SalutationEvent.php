@@ -4,6 +4,7 @@ namespace Drupal\hello_world;
 
 use Symfony\Component\EventDispatcher\Event;
 
+
 /**
  * Event class to be dispatched from the HelloWorldSalutation service.
  */
@@ -31,4 +32,5 @@ class SalutationEvent extends Event {
   public function setValue($message) {
     $this->message = $message;
   }
+
 }

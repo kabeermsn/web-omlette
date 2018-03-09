@@ -3,9 +3,8 @@
 namespace Drupal\hello_world;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use \Drupal\Core\Config\ConfigFactoryInterface;
-use \Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Drupal\hello_world\SalutationEvent;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class HelloWorldSalutation.
@@ -26,6 +25,7 @@ class HelloWorldSalutation {
 
   /**
    * Constructs a new HelloWorldSalutation object.
+   *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    */
@@ -35,8 +35,8 @@ class HelloWorldSalutation {
   }
 
   /**
-  * Returns the salutation
-  */
+   * Returns the salutation.
+   */
   public function getSalutation() {
     $config = $this->configFactory->get('hello_world.custom_salutation');
     $salutation = $config->get('salutation');
@@ -60,4 +60,5 @@ class HelloWorldSalutation {
       return $this->t('Good evening world');
     }
   }
+
 }
